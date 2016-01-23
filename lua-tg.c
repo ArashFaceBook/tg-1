@@ -1250,6 +1250,14 @@ void lua_do_all (void) {
       }
       p += 4;
       break;
+      case lq_block_user:
+      tgl_do_block_user (TLS, ((tgl_peer_t *)lua_ptr[p + 1])->id, lua_empty_cb, lua_ptr[p]);
+      p += 2;
+      break;
+    case lq_unblock_user:
+      tgl_do_unblock_user (TLS, ((tgl_peer_t *)lua_ptr[p + 1])->id, lua_empty_cb, lua_ptr[p]);
+      p += 2;
+      break;
   /*
   lq_delete_msg,
   lq_restore_msg,
@@ -1340,6 +1348,8 @@ struct lua_function functions[] = {
   {"send_location", lq_send_location, { lfp_peer, lfp_double, lfp_double, lfp_none }},  
   {"ext_function", lq_extf, { lfp_string, lfp_none }},
   {"import_chat_link", lq_import_chat_link, { lfp_string, lfp_none }},
+  {"block_user", lq_block_user, { lfp_user, lfp_none }},
+  {"unblock_user", lq_unblock_user, { lfp_user, lfp_none }},
   { 0, 0, { lfp_none}}
 };
 
